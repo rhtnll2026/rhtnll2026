@@ -1,0 +1,45 @@
+---
+layout: default
+---
+<div class="reading-progress" aria-hidden="true"><span></span></div>
+<article class="container narrow post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{% include reading-time.html content=content %}</span>
+    </div>
+    <h1 class="post-title" itemprop="headline">{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="post-lede">{{ page.description }}</p>{% endif %}
+    {%- if page.tags.size > 0 -%}
+    <ul class="tag-list">
+      {%- for tag in page.tags -%}
+      <li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a></li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </header>
+
+  {% if page.image %}
+  <figure class="post-cover"><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: '' }}"></figure>
+  {% endif %}
+
+  <div class="prose" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    {% if page.previous %}
+    <a class="post-nav-link prev" href="{{ page.previous.url | relative_url }}">
+      <span class="post-nav-label">← Older</span>
+      <span class="post-nav-title">{{ page.previous.title | escape }}</span>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if page.next %}
+    <a class="post-nav-link next" href="{{ page.next.url | relative_url }}">
+      <span class="post-nav-label">Newer →</span>
+      <span class="post-nav-title">{{ page.next.title | escape }}</span>
+    </a>
+    {% endif %}
+  </nav>
+</article>

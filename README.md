@@ -1,7 +1,11 @@
 ## Hi there 👋
 
+📝 **I write at [rhtnll2026.github.io/rhtnll2026](https://rhtnll2026.github.io/rhtnll2026/)** — notes, ideas & things I'm learning.
+
 <!--
 **rhtnll2026/rhtnll2026** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+This repo also hosts my blog — see BLOG_GUIDE.md for how it works.
 
 Here are some ideas to get you started:
 

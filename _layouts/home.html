@@ -1,0 +1,49 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Hello, I'm {{ site.author.name }} 👋</p>
+    <h1 class="hero-title">{{ site.tagline }}</h1>
+    <p class="hero-sub">{{ site.description }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#latest">Read the latest</a>
+      <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">About me</a>
+    </div>
+  </div>
+</section>
+
+{{ content }}
+
+<section id="latest" class="container">
+  <div class="section-head">
+    <h2>Latest posts</h2>
+    <a href="{{ '/archive/' | relative_url }}">All posts →</a>
+  </div>
+
+  {%- assign posts = site.posts -%}
+  {%- if posts.size > 0 -%}
+  {%- assign featured = posts.first -%}
+  <article class="featured">
+    <a class="featured-link" href="{{ featured.url | relative_url }}">
+      <span class="badge">New</span>
+      <div class="post-meta">
+        <time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%B %-d, %Y" }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{% include reading-time.html content=featured.content %}</span>
+      </div>
+      <h3 class="featured-title">{{ featured.title | escape }}</h3>
+      <p class="featured-excerpt">{{ featured.description | default: featured.excerpt | strip_html | strip_newlines | truncate: 260 }}</p>
+      <span class="read-more">Read post →</span>
+    </a>
+  </article>
+
+  <div class="post-grid">
+    {%- for post in posts offset: 1 limit: 12 -%}
+      {% include post-card.html post=post %}
+    {%- endfor -%}
+  </div>
+  {%- else -%}
+  <p class="empty">No posts yet — add a Markdown file to <code>_posts/</code> to get started.</p>
+  {%- endif -%}
+</section>

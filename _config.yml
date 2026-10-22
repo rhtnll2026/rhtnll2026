@@ -1,0 +1,56 @@
+# ─── Site settings ────────────────────────────────────────────────
+# Edit these to make the blog your own.
+title: rhtnll2026
+tagline: Notes, ideas & things I'm learning
+description: >-
+  A personal blog — writing about code, tools, and whatever I'm
+  curious about this week.
+lang: en
+
+author:
+  name: rhtnll2026
+  bio: Developer, learner, occasional writer.
+  github: rhtnll2026
+  # email: you@example.com    # uncomment to show a mail link
+
+# Where the site lives. For https://<user>.github.io/<repo>/ keep baseurl as "/<repo>".
+url: "https://rhtnll2026.github.io"
+baseurl: "/rhtnll2026"
+
+# ─── Build settings ───────────────────────────────────────────────
+permalink: /:year/:month/:day/:title/
+timezone: UTC
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  auto_ids: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+
+exclude:
+  - README.md
+  - BLOG_GUIDE.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .github
