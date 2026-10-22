@@ -1,0 +1,8 @@
+{%- comment -%}
+  Outputs the CSS class that hides a post in the language it should not appear in:
+  a post that has a translation only shows when its own language is selected.
+{%- endcomment -%}
+{%- if include.post.ref -%}
+  {%- assign versions = site.posts | where: "ref", include.post.ref -%}
+  {%- if versions.size > 1 -%}{%- if include.post.lang == "zh" -%}hide-en{%- else -%}hide-zh{%- endif -%}{%- endif -%}
+{%- endif -%}

@@ -1,0 +1,9 @@
+{%- comment -%} Marks a post that exists in one language only, shown to readers of the other. {%- endcomment -%}
+{%- capture v -%}{% include vis.html post=include.post %}{%- endcapture -%}
+{%- if v == "" -%}
+  {%- if include.post.lang == "zh" -%}
+  <span class="lang-badge" data-l="en" lang="en">Chinese</span>
+  {%- else -%}
+  <span class="lang-badge" data-l="zh" lang="zh-CN">英文</span>
+  {%- endif -%}
+{%- endif -%}

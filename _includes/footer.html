@@ -1,6 +1,8 @@
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} · Built with <a href="https://jekyllrb.com">Jekyll</a>, hosted free on <a href="https://pages.github.com">GitHub Pages</a>.</p>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} ·
+      <span data-l="en" lang="en">Built with <a href="https://jekyllrb.com">Jekyll</a>, hosted free on <a href="https://pages.github.com">GitHub Pages</a>.</span><span data-l="zh" lang="zh-CN">使用 <a href="https://jekyllrb.com">Jekyll</a> 构建，免费托管于 <a href="https://pages.github.com">GitHub Pages</a>。</span>
+    </p>
     <p class="footer-links">
       {% if site.author.github %}<a href="https://github.com/{{ site.author.github }}">GitHub</a>{% endif %}
       {% if site.author.email %}<a href="mailto:{{ site.author.email }}">Email</a>{% endif %}

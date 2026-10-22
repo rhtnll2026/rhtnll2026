@@ -13,6 +13,32 @@
     });
   }
 
+  // Language toggle: switches interface text in place, and jumps to the
+  // translated version when reading a post that has one.
+  var setLang = function (lang) {
+    root.dataset.uiLang = lang;
+    root.lang = lang === "zh" ? "zh-CN" : "en";
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+    document.querySelectorAll("[data-aria-en]").forEach(function (el) {
+      el.setAttribute("aria-label", el.getAttribute("data-aria-" + lang));
+    });
+  };
+  setLang(root.dataset.uiLang === "zh" ? "zh" : "en");
+
+  var langToggle = document.querySelector(".lang-toggle");
+  if (langToggle) {
+    langToggle.addEventListener("click", function () {
+      var next = root.dataset.uiLang === "zh" ? "en" : "zh";
+      setLang(next);
+      if (langToggle.dataset.altUrl && langToggle.dataset.altLang === next) {
+        window.location.href = langToggle.dataset.altUrl;
+      }
+    });
+  }
+  document.querySelectorAll("a[data-set-lang]").forEach(function (a) {
+    a.addEventListener("click", function () { setLang(a.dataset.setLang); });
+  });
+
   // Reading progress bar on posts.
   var bar = document.querySelector(".reading-progress span");
   var article = document.querySelector(".post .prose");

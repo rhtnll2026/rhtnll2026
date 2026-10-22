@@ -1,0 +1,19 @@
+# Interface text in each language. Use {% include t.html key="..." %} in templates.
+nav_home:        { en: "Home",            zh: "首页" }
+nav_archive:     { en: "Archive",         zh: "归档" }
+nav_tags:        { en: "Tags",            zh: "标签" }
+nav_about:       { en: "About",           zh: "关于" }
+hello:           { en: "Hello, I'm",      zh: "你好，我是" }
+tagline:         { en: "Notes, ideas & things I'm learning", zh: "笔记、想法，以及我正在学的东西" }
+description:     { en: "A personal blog — writing about code, tools, and whatever I'm curious about this week.", zh: "一个个人博客——写代码、工具，以及这周让我好奇的一切。" }
+read_latest:     { en: "Read the latest", zh: "阅读最新文章" }
+about_me:        { en: "About me",        zh: "关于我" }
+latest_posts:    { en: "Latest posts",    zh: "最新文章" }
+all_posts:       { en: "All posts →",     zh: "全部文章 →" }
+badge_new:       { en: "New",             zh: "最新" }
+read_post:       { en: "Read post →",     zh: "阅读全文 →" }
+older:           { en: "← Older",         zh: "← 上一篇" }
+newer:           { en: "Newer →",         zh: "下一篇 →" }
+no_posts:        { en: "No posts yet.",   zh: "还没有文章。" }
+not_found:       { en: "Sorry, that page doesn't exist — it may have moved, or the link might be wrong.", zh: "抱歉，页面不存在——它可能已被移动，或者链接有误。" }
+back_home:       { en: "Back to home",    zh: "返回首页" }

@@ -13,9 +13,11 @@ author:
   github: rhtnll2026
   # email: you@example.com    # uncomment to show a mail link
 
-# Where the site lives. For https://<user>.github.io/<repo>/ keep baseurl as "/<repo>".
+# Where the site lives. Served from the rhtnll2026.github.io repository, so no baseurl.
+# (The deploy workflow passes the right baseurl from GitHub Pages, so a project-site
+# address like https://<user>.github.io/<repo>/ keeps working too.)
 url: "https://rhtnll2026.github.io"
-baseurl: "/rhtnll2026"
+baseurl: ""
 
 # ─── Build settings ───────────────────────────────────────────────
 permalink: /:year/:month/:day/:title/
@@ -35,12 +37,22 @@ plugins:
 feed:
   path: feed.xml
 
+# Posts are English by default. Chinese posts go in _posts/zh/ and are served under /zh/.
+# To link a post with its translation, give both the same `ref:`.
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
+      lang: en
+  - scope:
+      path: "_posts/zh"
+      type: posts
+    values:
+      lang: zh
+      locale: zh_CN
+      permalink: /zh/:year/:month/:day/:title/
   - scope:
       path: ""
       type: pages

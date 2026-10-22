@@ -1,0 +1,2 @@
+{%- if include.format == "long" -%}{%- assign f = "%B %-d, %Y" -%}{%- else -%}{%- assign f = "%b %-d, %Y" -%}{%- endif -%}
+<time datetime="{{ include.date | date_to_xmlschema }}"><span data-l="en" lang="en">{{ include.date | date: f }}</span><span data-l="zh" lang="zh-CN">{{ include.date | date: "%Y年%-m月%-d日" }}</span></time>

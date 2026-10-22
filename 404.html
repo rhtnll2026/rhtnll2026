@@ -1,10 +1,11 @@
 ---
 title: Page not found
+title_zh: 页面不存在
 permalink: /404.html
 sitemap: false
 ---
 <div class="not-found">
   <p class="not-found-code">404</p>
-  <p>Sorry, that page doesn't exist — it may have moved, or the link might be wrong.</p>
-  <p><a class="btn btn-primary" href="{{ '/' | relative_url }}">Back to home</a></p>
+  <p>{% include t.html key="not_found" %}</p>
+  <p><a class="btn btn-primary" href="{{ '/' | relative_url }}">{% include t.html key="back_home" %}</a></p>
 </div>

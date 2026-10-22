@@ -1,4 +1,6 @@
+{%- comment -%} CJK characters count as one word each, and are read faster. {%- endcomment -%}
 {%- assign words = include.content | strip_html | number_of_words: "auto" -%}
-{%- assign minutes = words | divided_by: 220 -%}
+{%- if include.lang == "zh" -%}{%- assign rate = 400 -%}{%- else -%}{%- assign rate = 220 -%}{%- endif -%}
+{%- assign minutes = words | divided_by: rate -%}
 {%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
-{{ minutes }} min read
+<span data-l="en" lang="en">{{ minutes }} min read</span><span data-l="zh" lang="zh-CN">阅读约 {{ minutes }} 分钟</span>

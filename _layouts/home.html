@@ -3,12 +3,12 @@ layout: default
 ---
 <section class="hero">
   <div class="container hero-inner">
-    <p class="eyebrow">Hello, I'm {{ site.author.name }} 👋</p>
-    <h1 class="hero-title">{{ site.tagline }}</h1>
-    <p class="hero-sub">{{ site.description }}</p>
+    <p class="eyebrow">{% include t.html key="hello" %} {{ site.author.name }} 👋</p>
+    <h1 class="hero-title">{% include t.html key="tagline" %}</h1>
+    <p class="hero-sub">{% include t.html key="description" %}</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#latest">Read the latest</a>
-      <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">About me</a>
+      <a class="btn btn-primary" href="#latest">{% include t.html key="read_latest" %}</a>
+      <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">{% include t.html key="about_me" %}</a>
     </div>
   </div>
 </section>
@@ -17,33 +17,37 @@ layout: default
 
 <section id="latest" class="container">
   <div class="section-head">
-    <h2>Latest posts</h2>
-    <a href="{{ '/archive/' | relative_url }}">All posts →</a>
+    <h2>{% include t.html key="latest_posts" %}</h2>
+    <a href="{{ '/archive/' | relative_url }}">{% include t.html key="all_posts" %}</a>
   </div>
 
-  {%- assign posts = site.posts -%}
-  {%- if posts.size > 0 -%}
-  {%- assign featured = posts.first -%}
-  <article class="featured">
-    <a class="featured-link" href="{{ featured.url | relative_url }}">
-      <span class="badge">New</span>
-      <div class="post-meta">
-        <time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%B %-d, %Y" }}</time>
-        <span aria-hidden="true">·</span>
-        <span>{% include reading-time.html content=featured.content %}</span>
-      </div>
-      <h3 class="featured-title">{{ featured.title | escape }}</h3>
-      <p class="featured-excerpt">{{ featured.description | default: featured.excerpt | strip_html | strip_newlines | truncate: 260 }}</p>
-      <span class="read-more">Read post →</span>
-    </a>
-  </article>
+  {%- comment -%} The newest post readable in each language is featured; the rest go in the grid. {%- endcomment -%}
+  {%- assign featured_en = nil -%}
+  {%- assign featured_zh = nil -%}
+  {%- for post in site.posts -%}
+    {%- capture v -%}{% include vis.html post=post %}{%- endcapture -%}
+    {%- unless featured_en or v contains "hide-en" -%}{%- assign featured_en = post -%}{%- endunless -%}
+    {%- unless featured_zh or v contains "hide-zh" -%}{%- assign featured_zh = post -%}{%- endunless -%}
+  {%- endfor -%}
+
+  {%- if site.posts.size > 0 -%}
+    {%- if featured_en.url == featured_zh.url -%}
+      {% include featured.html post=featured_en %}
+    {%- else -%}
+      {%- if featured_en -%}{% include featured.html post=featured_en classes="hide-zh" %}{%- endif -%}
+      {%- if featured_zh -%}{% include featured.html post=featured_zh classes="hide-en" %}{%- endif -%}
+    {%- endif -%}
 
   <div class="post-grid">
-    {%- for post in posts offset: 1 limit: 12 -%}
-      {% include post-card.html post=post %}
+    {%- for post in site.posts -%}
+      {%- capture v -%}{% include vis.html post=post %}{%- endcapture -%}
+      {%- capture classes -%}{{ v }}{% if post.url == featured_en.url %} hide-en{% endif %}{% if post.url == featured_zh.url %} hide-zh{% endif %}{%- endcapture -%}
+      {%- unless classes contains "hide-en" and classes contains "hide-zh" -%}
+      {% include post-card.html post=post classes=classes %}
+      {%- endunless -%}
     {%- endfor -%}
   </div>
   {%- else -%}
-  <p class="empty">No posts yet — add a Markdown file to <code>_posts/</code> to get started.</p>
+  <p class="empty">{% include t.html key="no_posts" %}</p>
   {%- endif -%}
 </section>
