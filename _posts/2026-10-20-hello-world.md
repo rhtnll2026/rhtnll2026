@@ -1,6 +1,7 @@
 ---
 title: "Hello, world — welcome to my blog"
 description: "Why I started writing in public, and what you can expect to find here."
+ref: hello-world
 tags: [meta, writing]
 ---
 

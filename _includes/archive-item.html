@@ -1,0 +1,6 @@
+{%- capture v -%}{% include vis.html post=include.post %}{%- endcapture -%}
+<li class="{{ v }}">
+  {% include date.html date=include.post.date %}
+  <a href="{{ include.post.url | relative_url }}" lang="{{ include.post.lang }}">{{ include.post.title | escape }}</a>
+  {% include lang-badge.html post=include.post %}
+</li>

@@ -1,10 +1,11 @@
 {%- assign post = include.post -%}
-<article class="post-card">
+<article class="post-card {{ include.classes }}" lang="{{ post.lang }}">
   <a class="post-card-link" href="{{ post.url | relative_url }}">
     <div class="post-meta">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      {% include date.html date=post.date %}
       <span aria-hidden="true">·</span>
-      <span>{% include reading-time.html content=post.content %}</span>
+      <span>{% include reading-time.html content=post.content lang=post.lang %}</span>
+      {% include lang-badge.html post=post %}
     </div>
     <h3 class="post-card-title">{{ post.title | escape }}</h3>
     <p class="post-card-excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>

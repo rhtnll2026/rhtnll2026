@@ -1,21 +1,21 @@
 ---
 title: Archive
+title_zh: 归档
 subtitle: Every post, newest first.
+subtitle_zh: 全部文章，按时间倒序排列。
 permalink: /archive/
 ---
 {%- assign by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
 {%- for year in by_year -%}
-<section class="archive-year">
-  <h2 id="y{{ year.name }}">{{ year.name }} <span class="count">{{ year.items.size }}</span></h2>
+{% include lang-counts.html posts=year.items %}
+<section class="archive-year {{ section_classes }}">
+  <h2 id="y{{ year.name }}">{{ year.name }} <span class="count"><span data-l="en">{{ count_en }}</span><span data-l="zh">{{ count_zh }}</span></span></h2>
   <ul class="archive-list">
     {%- for post in year.items -%}
-    <li>
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d" }}</time>
-      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-    </li>
+    {% include archive-item.html post=post %}
     {%- endfor -%}
   </ul>
 </section>
 {%- else -%}
-<p>No posts yet.</p>
+<p>{% include t.html key="no_posts" %}</p>
 {%- endfor -%}

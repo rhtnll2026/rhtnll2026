@@ -1,13 +1,39 @@
 ---
 layout: default
 ---
+{%- include translation.html -%}
+{%- comment -%} Neighbours within the same language (site.posts is newest first). {%- endcomment -%}
+{%- assign same_lang = site.posts | where: "lang", page.lang -%}
+{%- assign newer_post = nil -%}
+{%- assign older_post = nil -%}
+{%- for p in same_lang -%}
+  {%- if p.url == page.url -%}
+    {%- assign i_newer = forloop.index0 | minus: 1 -%}
+    {%- assign i_older = forloop.index0 | plus: 1 -%}
+    {%- if forloop.first == false -%}{%- assign newer_post = same_lang[i_newer] -%}{%- endif -%}
+    {%- if forloop.last == false -%}{%- assign older_post = same_lang[i_older] -%}{%- endif -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
 <div class="reading-progress" aria-hidden="true"><span></span></div>
-<article class="container narrow post" itemscope itemtype="https://schema.org/BlogPosting">
+<article class="container narrow post" lang="{% if page.lang == 'zh' %}zh-CN{% else %}en{% endif %}" itemscope itemtype="https://schema.org/BlogPosting">
+  {%- if page.lang == "zh" -%}
+  <p class="lang-note" data-l="en" lang="en">
+    {%- if translation -%}This post is also available in English. <a href="{{ translation.url | relative_url }}" data-set-lang="en">Read it in English →</a>
+    {%- else -%}This post is only available in Chinese.{%- endif -%}
+  </p>
+  {%- else -%}
+  <p class="lang-note" data-l="zh" lang="zh-CN">
+    {%- if translation -%}本文有中文版本。<a href="{{ translation.url | relative_url }}" data-set-lang="zh">阅读中文版 →</a>
+    {%- else -%}本文暂无中文版本，以下为英文原文。{%- endif -%}
+  </p>
+  {%- endif -%}
+
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% include date.html date=page.date format="long" %}
       <span aria-hidden="true">·</span>
-      <span>{% include reading-time.html content=content %}</span>
+      <span>{% include reading-time.html content=content lang=page.lang %}</span>
     </div>
     <h1 class="post-title" itemprop="headline">{{ page.title | escape }}</h1>
     {% if page.description %}<p class="post-lede">{{ page.description }}</p>{% endif %}
@@ -29,16 +55,16 @@ layout: default
   </div>
 
   <nav class="post-nav" aria-label="More posts">
-    {% if page.previous %}
-    <a class="post-nav-link prev" href="{{ page.previous.url | relative_url }}">
-      <span class="post-nav-label">← Older</span>
-      <span class="post-nav-title">{{ page.previous.title | escape }}</span>
+    {% if older_post %}
+    <a class="post-nav-link prev" href="{{ older_post.url | relative_url }}">
+      <span class="post-nav-label">{% include t.html key="older" %}</span>
+      <span class="post-nav-title">{{ older_post.title | escape }}</span>
     </a>
     {% else %}<span></span>{% endif %}
-    {% if page.next %}
-    <a class="post-nav-link next" href="{{ page.next.url | relative_url }}">
-      <span class="post-nav-label">Newer →</span>
-      <span class="post-nav-title">{{ page.next.title | escape }}</span>
+    {% if newer_post %}
+    <a class="post-nav-link next" href="{{ newer_post.url | relative_url }}">
+      <span class="post-nav-label">{% include t.html key="newer" %}</span>
+      <span class="post-nav-title">{{ newer_post.title | escape }}</span>
     </a>
     {% endif %}
   </nav>

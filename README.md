@@ -1,20 +1,9 @@
-## Hi there 👋
+# rhtnll2026.github.io
 
-📝 **I write at [rhtnll2026.github.io/rhtnll2026](https://rhtnll2026.github.io/rhtnll2026/)** — notes, ideas & things I'm learning.
+📝 **https://rhtnll2026.github.io** — notes, ideas & things I'm learning · 笔记、想法，以及我正在学的东西
 
-<!--
-**rhtnll2026/rhtnll2026** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+My personal blog, in English and Chinese. Built with [Jekyll](https://jekyllrb.com) and hosted free on
+[GitHub Pages](https://pages.github.com). Posts live in [`_posts/`](_posts) (English) and
+[`_posts/zh/`](_posts/zh) (Chinese).
 
-This repo also hosts my blog — see BLOG_GUIDE.md for how it works.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+See [BLOG_GUIDE.md](BLOG_GUIDE.md) for how to write posts, translate them, and customise the site.

@@ -1,0 +1,12 @@
+{%- comment -%}
+  Given a list of posts, sets count_en / count_zh to how many show in each language,
+  and section_classes to hide the whole section in a language where none show.
+{%- endcomment -%}
+{%- assign count_en = 0 -%}
+{%- assign count_zh = 0 -%}
+{%- for p in include.posts -%}
+  {%- capture v -%}{% include vis.html post=p %}{%- endcapture -%}
+  {%- unless v contains "hide-en" -%}{%- assign count_en = count_en | plus: 1 -%}{%- endunless -%}
+  {%- unless v contains "hide-zh" -%}{%- assign count_zh = count_zh | plus: 1 -%}{%- endunless -%}
+{%- endfor -%}
+{%- capture section_classes -%}{% if count_en == 0 %}hide-en{% endif %} {% if count_zh == 0 %}hide-zh{% endif %}{%- endcapture -%}

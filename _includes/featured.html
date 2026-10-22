@@ -1,0 +1,15 @@
+{%- assign post = include.post -%}
+<article class="featured {{ include.classes }}" lang="{{ post.lang }}">
+  <a class="featured-link" href="{{ post.url | relative_url }}">
+    <span class="badge">{% include t.html key="badge_new" %}</span>
+    <div class="post-meta">
+      {% include date.html date=post.date format="long" %}
+      <span aria-hidden="true">·</span>
+      <span>{% include reading-time.html content=post.content lang=post.lang %}</span>
+      {% include lang-badge.html post=post %}
+    </div>
+    <h3 class="featured-title">{{ post.title | escape }}</h3>
+    <p class="featured-excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 260 }}</p>
+    <span class="read-more">{% include t.html key="read_post" %}</span>
+  </a>
+</article>

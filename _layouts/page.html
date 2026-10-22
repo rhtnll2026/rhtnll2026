@@ -3,8 +3,16 @@ layout: default
 ---
 <article class="container narrow page">
   <header class="page-header">
+    {%- if page.title_zh -%}
+    <h1 class="page-title"><span data-l="en" lang="en">{{ page.title | escape }}</span><span data-l="zh" lang="zh-CN">{{ page.title_zh | escape }}</span></h1>
+    {%- else -%}
     <h1 class="page-title">{{ page.title | escape }}</h1>
-    {% if page.subtitle %}<p class="page-subtitle">{{ page.subtitle }}</p>{% endif %}
+    {%- endif -%}
+    {%- if page.subtitle_zh -%}
+    <p class="page-subtitle"><span data-l="en" lang="en">{{ page.subtitle }}</span><span data-l="zh" lang="zh-CN">{{ page.subtitle_zh }}</span></p>
+    {%- elsif page.subtitle -%}
+    <p class="page-subtitle">{{ page.subtitle }}</p>
+    {%- endif -%}
   </header>
   <div class="prose">
     {{ content }}

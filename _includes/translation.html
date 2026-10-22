@@ -1,0 +1,7 @@
+{%- comment -%} Sets `translation` to the other-language version of the current post, if any. {%- endcomment -%}
+{%- assign translation = nil -%}
+{%- if page.ref -%}
+  {%- for p in site.posts -%}
+    {%- if p.ref == page.ref and p.url != page.url -%}{%- assign translation = p -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

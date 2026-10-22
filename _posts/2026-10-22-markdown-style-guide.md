@@ -1,6 +1,7 @@
 ---
 title: "Markdown style guide: everything this blog can render"
 description: "A quick tour of headings, lists, quotes, tables, and syntax-highlighted code — useful as a reference when writing."
+ref: markdown-style-guide
 tags: [guide, markdown]
 ---
 
